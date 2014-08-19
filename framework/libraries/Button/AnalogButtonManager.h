@@ -26,6 +26,13 @@
 class AnalogButton;
 typedef void (*buttonEventHandler)(AnalogButton&);
 
+struct AnalogButtonStruct
+{
+    const char *buttonName,
+    const int analogReadingLowValue,
+    const int analogReadingHighValue
+};
+
 class AnalogButtonManager
 {
   public:
@@ -37,17 +44,24 @@ class AnalogButtonManager
     uint8_t ID;
 
     // Methods
+    void addButon(AnalogButtonStruct &analogButtonStruct);
     bool scan();
+    bool isPressed() const;
+    bool stateChanged() const;
+    bool uniquePress() const;
+    unsigned int clicked();
+    bool held(unsigned long time = 0);
+    bool heldFor(unsigned long time) const;
     
     // Properties
     void setDebounceDelay(unsigned int debounceDelay);
     void setHoldThreshold(unsigned int holdTime);
     void setHoldRepeat(unsigned int repeatTime);
     void setMultiClickThreshold(unsigned int multiClickTime);
-    void pressHandler(buttonEventHandler handler);
-    void releaseHandler(buttonEventHandler handler);
-    void clickHandler(buttonEventHandler handler);
-    void holdHandler(buttonEventHandler handler, unsigned long holdTime = 0);
+    void pressHandler(const char *buttonName, buttonEventHandler handler);
+    void releaseHandler(const char *buttonName, buttonEventHandler handler);
+    void clickHandler(const char *buttonName, buttonEventHandler handler);
+    void holdHandler(const char *buttonName, buttonEventHandler handler, unsigned long holdTime = 0);
 
     unsigned long holdTime() const;
     unsigned long heldTime() const;
