@@ -42,7 +42,7 @@ AnalogButtonManager::AnalogButtonManager()
 ||
 || @returns true if button is pressed.
 */
-void AnalogButtonManager::addButon(AnalogButtonStruct &analogButtonStruct)
+void AnalogButtonManager::addButon(const char *name, int lowValue, int highValue)
 {
 
 }

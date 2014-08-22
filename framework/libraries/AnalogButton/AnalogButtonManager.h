@@ -85,6 +85,14 @@ class AnalogButtonManager
   private:
     uint8_t mode;
     uint8_t state;
+    
+    struct AnalogButtonStructList
+    {
+        const char *buttonName,
+        const int analogReadingLowValue,
+        const int analogReadingHighValue
+        AnalogButtonStruct *nx
+    }
 };
 
 #endif
